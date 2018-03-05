@@ -1,0 +1,17 @@
+{
+  "name": "domotica",
+  "version": "1.0.1",
+  "description": "Sensado de diferente circuitos de domotica",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Guillermo Cabana",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^2.5.7",
+    "express": "^4.16.2",
+    "serialport": "^6.0.4",
+    "socket.io": "^2.0.4"
+  }
+}

@@ -1,0 +1,9 @@
+body{
+    background: rgba(53,53,53,0.89);
+    
+    background-image: url(../imagen/fondo1.png);
+    background-repeat: no-repeat;
+    background-size: 80% 80vh;
+    background-position: 40% 10vh;
+}
+

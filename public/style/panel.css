@@ -1,0 +1,30 @@
+.panel{
+    margin-top: 100px;
+    background: rgba(0,0,0,0.2);
+    border-radius: 5px;
+}
+
+.panel .panel-heading{
+    background: #333;
+    
+    font-size: 15px;
+}
+
+.panel .panel-body{
+    color:white;
+    font-size: 15px;
+    
+    box-shadow: 0 10px 20px 2px white;
+}
+
+.panel .panel-body img{
+    width: 100%;
+    border-radius: 50%;
+}
+
+.input-group .input-group-addon{
+    background: #333;
+    color:white;
+} 
+
+

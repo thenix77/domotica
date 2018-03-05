@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="./style/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="./style/font-awesome/css/font-awesome.min.css">
+    
+    <link rel="stylesheet" href="./style/menu.css">
+    <link rel="stylesheet" href="./style/fondo.css">
+    <link rel="stylesheet" href="./style/bootstrap.css">
+    
+</head>
+<body>
+    
+    <div class="container">
+        <div class="panel panel-primary" >
+            <div class="panel-heading">
+                hola 
+            </div>
+            <div class="panel-body">
+                hello
+            </div>
+        </div>
+    </div>
+    
+    <script src="./js/jquery/dist/jquery.min.js"></script>
+    <script src="./style/bootstrap/dist/js/bootstrap.min.js"></script>
+    
+    <script src="socket.io/socket.io.js"></script>
+    
+    <script>
+        $(function () {
+            var socket = io();
+            $('form').submit(function(){
+              socket.emit('msg', $('#m').val());
+              $('#m').val('');
+              return false;
+            });
+        });
+        
+        
+    
+    </script>
+   
+</body>
+</html>

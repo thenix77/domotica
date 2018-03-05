@@ -1,0 +1,153 @@
+<% include ../template/head.ejs %>
+    
+<% include ../template/navbar.ejs %>
+
+<div class="container" ng-controller="crtltest">
+
+   hola gato gatuno
+    <div class="panel panel-default" >
+        <div class="panel-heading">
+           <h2 class="text-center" style="color:white"><u>Usuarios del Sistema</u></h2>
+           
+        </div>
+        <div class="panel-body">
+            <h2 class="text-center">Lista de Usuarios</h2>
+           <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal"><i class="fa fa-user-plus"></i> Registrar Usuario</button>
+            <br>
+            <div style="display:absolute; width:60%; margin:auto">
+                <table class="table table-bordered">
+                <tr>
+                    <td><b>N</b></td>
+                    <td><b>Nombre</b></td>
+                    <td><b>Email</b></td>
+                    <td></td>
+                </tr>
+                <tr ng-repeat="(key,list) in lists">
+                    <td width="10%">{{ key+1 }}</td>
+                    <td width="45%">{{ list.name }}</td>
+                    <td width="30%">{{ list.email}}</td>
+                    <td width="15%" align='center'>
+                        <a href="#"><span style='color:yellow'><i class="fa fa-2x fa-pencil"></i></span></a> |
+                        <a href="#"><span style='color:red'><i class="fa fa-2x fa-trash"></i></span></a>
+                    </td>
+                </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <!--  -->
+    <!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+      <form>
+    <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header modal-header-primary">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title text-alert">Registro Usuario</h4>
+      </div>
+      <div class="modal-body">
+        <p>Registro</p>
+        
+        <div class="alert alert-danger" role="alert" ng-show="mostrar">
+            <b>{{ title }}:</b> {{ body }} 
+        </div>
+        
+        <div class="form-group">
+        <label for="email">Email address</label>
+            <input type="email" class="form-control" ng-model="email" placeholder="Email">
+         </div>
+         <div class="form-group">
+          <label for="name">Nombre</label>
+            <input type="text" class="form-control" ng-model="name" placeholder="Nombre">
+         </div>
+         <div class="form-group">
+          <label for="pwd">Contraseña</label>
+            <input type="password" class="form-control" ng-model="pwd" placeholder="Contraseña">
+         </div>
+         <div class="form-group">
+          <label for="pwd1">Repita Contraseña</label>
+            <input type="password" class="form-control" ng-model="pwd1" placeholder="Contraseña">
+         </div>
+       
+      </div>
+      <div class="modal-footer">
+        <button ng-click="guardar()" class="btn btn-default"><i class="fa fa-floppy-o"></i> Guardar</button> 
+        <button ng-click="cerrar()"  class="btn btn-primary"><i class="fa fa-close"></i> Close</button>
+      </div>
+    </div>
+
+  </div>
+ </form>
+</div>
+<!--   ******************  -->
+
+</div>
+
+
+
+
+<!-- Fin -->
+ <% include ../template/script.ejs %>
+
+ <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<script>
+
+  var app = angular.module('domotica',[]);
+         
+ app.controller('crtltest',['$scope','$http',function($scope,$http){
+
+     $scope.mostrar = false;
+   
+     
+     $http.get("http://apinix.com/api/Users")
+            .then(function(data) {
+                $scope.lists = data.data;
+             
+        });
+     
+     $scope.guardar = function(){
+        if ($scope.pwd != $scope.pwd1)
+            {
+               $scope.mostrar = true;
+               $scope.title = 'Alerta';
+                $scope.body = 'La Constraseña no coincide';
+                return false;
+            }
+         
+     $http.post('http://apinix.com/api/Users',
+           {
+                name:       $scope.name,
+                email:      $scope.email,
+                password:   $scope.pwd
+            },
+                function(data)
+                { 
+                    console.log(data);
+                }
+
+           );
+         
+        limpiar();
+         
+      };
+     
+     $scope.cerrar = function(){
+         $('#myModal').modal('hide');
+         limpiar();
+         
+     }
+     
+     var limpiar = function(){
+         $scope.mostrar = false;
+         $scope.name    = '';
+         $scope.email   = '';
+         $scope.pwd     = '';
+     }
+     
+
+ }]);
+
+</script>
